@@ -4,7 +4,8 @@ mypaper_bak
 
 说明
 ----
-HUST 本科毕业论文LaTeX论文模板
+HUST 本科毕业论文LaTeX论文模板。
+Fork自[这里](https://code.google.com/p/nwputhesis/)。表示感谢!
 
 使用方法
 --------
@@ -31,15 +32,15 @@ Linux系统编译字体需求
         C:\Winsows\Fonts\simhei.ttf
         C:\Winsows\Fonts\simkai.ttf
         C:\Winsows\Fonts\STFANGSO.TTF
-
-**注意** 如果打开Windows的Fonts目录时，不会显示文件名，只显示字体中文名字，右键字体，查看属性可以看到字体
-        文件名(即`simsun.ttc`...)。
+      **注意:** 打开Windows的Fonts文件夹时，不会显示文件名，只显示字体中文名字,这四个
+          字体的中文名分别是*宋体 常规*、*黑体 常规*、*楷体 常规*和*华文仿宋 常规*。
+          如果要查看字体的**文件名**右键字体，可右键字体点击属性查看。
 
 * 拷贝完后,更新Linux系统上的字体cache
 
         $ fc-cache
 
-* 再查看系统可用的中文字体，确认上述字体已经可以为XeLaTeX使用：
+* 再查看系统可用的中文字体，确认上述字体已经可以使用。
 
         $ fc-list :lang=zh
 
@@ -47,3 +48,8 @@ Linux系统编译字体需求
 *  接下来就可以Make了
 
         $ make
+
+参考
+----
+* [LaTeX中文排版](http://linux-wiki.cn/wiki/zh-hans/LaTeX%E4%B8%AD%E6%96%87%E6%8E%92%E7%89%88%EF%BC%88%E4%BD%BF%E7%94%A8XeTeX%EF%BC%89)
+* [Archwiki](https://wiki.archlinux.org/index.php/TeXLive_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87))
