@@ -15,7 +15,8 @@ clean:
 	find -name "*.toc" -exec rm -v {} \;
 	find -name "*.bbl" -exec rm -v {} \;
 
-suck:
+# 变态的目录要求, 要安装pdftk
+suck: 
 	pdftk main.pdf cat 1 output cover_bak.pdf
 	pdftk main.pdf cat 4-5 output toc_raw.pdf
 	pdftk main.pdf cat 2-3 output abstruct.pdf
