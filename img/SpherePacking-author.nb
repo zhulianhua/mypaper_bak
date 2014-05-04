@@ -1,0 +1,1458 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     62433,       1449]
+NotebookOptionsPosition[     58616,       1331]
+NotebookOutlinePosition[     60218,       1381]
+CellTagsIndexPosition[     59890,       1369]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Sphere Packing", "DemoTitle",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4574542864335485`*^9, 3.4574542926424675`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["", "InitializationSection"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pointList", "[", 
+   RowBox[{"lat_", ",", "cut_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"store", " ", "=", " ", 
+      RowBox[{"N", "[", 
+       RowBox[{"Which", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"lat", "==", "\"\<SC\>\""}], ",", 
+         RowBox[{"Flatten", "[", 
+          RowBox[{
+           RowBox[{"Table", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"x", ",", "0", ",", 
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"y", ",", "0", ",", 
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"z", ",", "0", ",", 
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "]"}], ",", "2"}], 
+          "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"lat", "==", "\"\<FCC\>\""}], ",", 
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 RowBox[{
+                  RowBox[{"Sqrt", "[", "2", "]"}], "/", "2"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", 
+                 RowBox[{
+                  RowBox[{"Sqrt", "[", "2", "]"}], "/", "2"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"z", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], ",", 
+                 RowBox[{
+                  RowBox[{"Sqrt", "[", "2", "]"}], "/", "2"}]}], "}"}]}], 
+              "]"}], ",", "2"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"EvenQ", "[", 
+             RowBox[{"FullSimplify", "[", 
+              RowBox[{"Total", "[", 
+               RowBox[{"#", "/", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"Sqrt", "[", "2", "]"}], "/", "2"}], ")"}]}], "]"}],
+               "]"}], "]"}], "&"}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"lat", "==", "\"\<BCC\>\""}], ",", 
+         RowBox[{"Select", "[", 
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"x", ",", "y", ",", "z"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], ",", 
+                 FractionBox["1", 
+                  SqrtBox["3"]]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], ",", 
+                 FractionBox["1", 
+                  SqrtBox["3"]]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"z", ",", "0", ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "3", "]"}], "]"}], ",", 
+                 FractionBox["1", 
+                  SqrtBox["3"]]}], "}"}]}], "]"}], ",", "2"}], "]"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", 
+              RowBox[{"Union", "[", 
+               RowBox[{"EvenQ", "[", 
+                RowBox[{"FullSimplify", "[", 
+                 RowBox[{"#", "/", 
+                  RowBox[{"(", 
+                   FractionBox["1", 
+                    SqrtBox["3"]], ")"}]}], "]"}], "]"}], "]"}], "]"}], 
+             "\[Equal]", "1"}], "&"}]}], "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"lat", "==", "\"\<HCP\>\""}], ",", 
+         RowBox[{"Join", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"x", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "+", 
+                RowBox[{"y", 
+                 RowBox[{"{", 
+                  RowBox[{".5", ",", 
+                   RowBox[{
+                    SqrtBox["3"], "/", "2"}], ",", "0"}], "}"}]}], "+", 
+                RowBox[{"z", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0", ",", 
+                   SqrtBox[
+                    RowBox[{"8", "/", "3"}]]}], "}"}]}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"2", 
+                  RowBox[{"Max", "[", "cut", "]"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"z", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"cut", "[", 
+                  RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "]"}], ",", 
+             "2"}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Flatten", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{".5", ",", 
+                  RowBox[{
+                   SqrtBox["3"], "/", "6"}], ",", 
+                  SqrtBox[
+                   RowBox[{"2", "/", "3"}]]}], "}"}], "+", 
+                RowBox[{"x", 
+                 RowBox[{"{", 
+                  RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "+", 
+                RowBox[{"y", 
+                 RowBox[{"{", 
+                  RowBox[{".5", ",", 
+                   RowBox[{
+                    SqrtBox["3"], "/", "2"}], ",", "0"}], "}"}]}], "+", 
+                RowBox[{"z", 
+                 RowBox[{"{", 
+                  RowBox[{"0", ",", "0", ",", 
+                   SqrtBox[
+                    RowBox[{"8", "/", "3"}]]}], "}"}]}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"x", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"2", 
+                  RowBox[{"Max", "[", "cut", "]"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"y", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"2", 
+                  RowBox[{"Max", "[", "cut", "]"}]}]}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"z", ",", 
+                 RowBox[{"-", 
+                  RowBox[{"Max", "[", "cut", "]"}]}], ",", 
+                 RowBox[{"2", 
+                  RowBox[{"Max", "[", "cut", "]"}]}]}], "}"}]}], "]"}], ",", 
+             "2"}], "]"}]}], "\[IndentingNewLine]", "]"}]}], "]"}], "]"}]}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Cases", "[", 
+      RowBox[{"store", " ", ",", 
+       RowBox[{
+        RowBox[{"xx_", "?", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"0", "\[LessEqual]", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "-", "1"}]}], "&&", 
+             RowBox[{"0", "\[LessEqual]", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "-", "1"}]}], "&&", 
+             RowBox[{"0", "\[LessEqual]", 
+              RowBox[{
+              "#", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"cut", "[", 
+                RowBox[{"[", "3", "]"}], "]"}], "-", "1"}]}]}], ")"}], "&"}], 
+          ")"}]}], "\[Rule]", "xx"}]}], "]"}], "+", 
+     RowBox[{"1", "/", "2"}]}]}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellID->184601695]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Column", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Text", "@", 
+        RowBox[{"Grid", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<SC\>\"", ",", "\"\<FCC\>\"", ",", "\"\<BCC\>\"", ",", 
+             "\"\<HCP\>\""}], "}"}], ",", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", 
+              RowBox[{"pointList", "[", 
+               RowBox[{"#", ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "w"}], "}"}]}], "]"}], "]"}], 
+             "&"}], "/@", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<SC\>\"", ",", "\"\<FCC\>\"", ",", "\"\<BCC\>\"", ",", 
+              "\"\<HCP\>\""}], "}"}]}]}], " ", "}"}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Graphics3D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"Thick", ",", " ", "Green", ",", 
+             RowBox[{"Line", "[", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "l", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "l", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "l", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "0", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "0", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "0", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "l", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "0", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "w"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "0"}], "}"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"h", ",", "l", ",", "w"}], "}"}]}], "}"}], "]"}]}], 
+            "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Sphere", "[", 
+            RowBox[{
+             RowBox[{"pointList", "[", 
+              RowBox[{"Lattice", ",", 
+               RowBox[{"{", 
+                RowBox[{"h", ",", "l", ",", "w"}], "}"}]}], "]"}], ",", 
+             RowBox[{"1", "/", "2"}]}], "]"}]}], "}"}], ",", 
+         RowBox[{"ImageSize", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+         RowBox[{"SphericalRegion", "\[Rule]", " ", "True"}], ",", " ", 
+         RowBox[{"Boxed", "\[Rule]", " ", "False"}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Alignment", "\[Rule]", " ", "Center"}]}], "]"}], ",", 
+   "\[IndentingNewLine]", "\"\<lattice\>\"", ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"Lattice", ",", "\"\<SC\>\"", ",", "\"\<\>\""}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<SC\>\"", ",", "\"\<FCC\>\"", ",", "\"\<BCC\>\"", ",", 
+       "\"\<HCP\>\""}], "}"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   "\"\<box dimensions                              \>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"h", ",", "4"}], "}"}], ",", "2", ",", "7", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"w", ",", "5"}], "}"}], ",", "2", ",", "7", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"l", ",", "6"}], "}"}], ",", "2", ",", "7", ",", 
+     RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+   RowBox[{"ControlPlacement", "\[Rule]", " ", "Left"}], ",", " ", 
+   RowBox[{"SaveDefinitions", "\[Rule]", " ", "True"}], ",", " ", 
+   RowBox[{"TrackedSymbols", "\[Rule]", " ", "True"}]}], "]"}]], "Input",
+ CellChangeTimes->{
+  3.35696210375764*^9, 3.4574546254653273`*^9, {3.4574550415855365`*^9, 
+   3.4574550667800207`*^9}, {3.457458039463504*^9, 3.4574580748761845`*^9}, {
+   3.457458118557025*^9, 3.457458131068465*^9}, {3.4574581921904407`*^9, 
+   3.4574581964337225`*^9}, {3.457740212819194*^9, 3.45774024968688*^9}, {
+   3.457881805233012*^9, 3.45788181102985*^9}, {3.457884204655156*^9, 
+   3.4578842067957673`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 4, $CellContext`l$$ = 
+    6, $CellContext`Lattice$$ = "SC", $CellContext`w$$ = 5, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["lattice"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Lattice$$], "SC", ""}, {"SC", "FCC", "BCC", "HCP"}}, {
+      Hold["box dimensions                              "], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`h$$], 4}, 2, 7}, {{
+       Hold[$CellContext`w$$], 5}, 2, 7}, {{
+       Hold[$CellContext`l$$], 6}, 2, 7}}, Typeset`size$$ = {
+    400., {215.5, 220.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`Lattice$1661914$$ = 
+    0, $CellContext`h$1661915$$ = 0, $CellContext`w$1661916$$ = 
+    0, $CellContext`l$1661917$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 4, $CellContext`l$$ = 
+        6, $CellContext`Lattice$$ = "SC", $CellContext`w$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Lattice$$, $CellContext`Lattice$1661914$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1661915$$, 0], 
+        Hold[$CellContext`w$$, $CellContext`w$1661916$$, 0], 
+        Hold[$CellContext`l$$, $CellContext`l$1661917$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         Text[
+          Grid[{{"SC", "FCC", "BCC", "HCP"}, 
+            Map[Length[
+              $CellContext`pointList[#, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}]]& , {"SC", "FCC", "BCC", "HCP"}]}]], 
+         Graphics3D[{{Thick, Green, 
+            
+            Line[{{0, 0, 0}, {$CellContext`h$$, 0, 0}, {0, 0, 0}, {
+              0, $CellContext`l$$, 0}, {0, 0, 0}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {
+              0, $CellContext`l$$, 0}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, 0, 0}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, $CellContext`l$$, $CellContext`w$$}}]}, 
+           Sphere[
+            $CellContext`pointList[$CellContext`Lattice$$, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}], 1/2]}, ImageSize -> {400, 400}, 
+          SphericalRegion -> True, Boxed -> False]}, Alignment -> Center], 
+      "Specifications" :> {
+       "lattice", {{$CellContext`Lattice$$, "SC", ""}, {
+         "SC", "FCC", "BCC", "HCP"}}, 
+        "box dimensions                              ", {{$CellContext`h$$, 
+          4}, 2, 7, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`w$$, 5}, 2, 7, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`l$$, 6}, 2, 7, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{609., {246., 251.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`pointList[
+         Pattern[$CellContext`lat, 
+          Blank[]], 
+         Pattern[$CellContext`cut, 
+          Blank[]]] := With[{$CellContext`store = N[
+            Which[$CellContext`lat == "SC", 
+             Flatten[
+              
+              Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                Part[$CellContext`cut, 1]}, {$CellContext`y, 0, 
+                Part[$CellContext`cut, 2]}, {$CellContext`z, 0, 
+                Part[$CellContext`cut, 3]}], 2], $CellContext`lat == "FCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], Sqrt[2]/2}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], Sqrt[2]/2}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], Sqrt[2]/2}], 2], EvenQ[
+               FullSimplify[
+                Total[#/(Sqrt[2]/2)]]]& ], $CellContext`lat == "BCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], 1/Sqrt[3]}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], 1/Sqrt[3]}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], 1/Sqrt[3]}], 2], Length[
+                Union[
+                 EvenQ[
+                  FullSimplify[#/(1/Sqrt[3])]]]] == 1& ], $CellContext`lat == 
+             "HCP", 
+             Join[
+              Flatten[
+               
+               Table[$CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 2]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 3]}], 2], 
+              Flatten[
+               Table[{0.5, Sqrt[3]/6, 
+                  Sqrt[2/3]} + $CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 2 Max[$CellContext`cut]}], 2]]]]}, 
+         Cases[$CellContext`store, PatternTest[
+             Pattern[$CellContext`xx, 
+              Blank[]], And[
+             0 <= Part[#, 1] <= Part[$CellContext`cut, 1] - 1, 0 <= 
+              Part[#, 2] <= Part[$CellContext`cut, 2] - 1, 0 <= Part[#, 3] <= 
+              Part[$CellContext`cut, 3] - 1]& ] -> $CellContext`xx] + 1/2]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->90292882]
+}, {2}]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ManipulateCaptionSection"],
+
+Cell["\<\
+Q: What is the densest packing of spheres in a box? A: Depends on the box. \
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.457454651439827*^9, 3.457454771407134*^9}, {
+   3.4574548421045003`*^9, 3.4574549299653897`*^9}, {3.457454982881607*^9, 
+   3.4574550343469973`*^9}, 3.4574588484347153`*^9, 3.457458902930805*^9}],
+
+Cell["\<\
+This Demonstration shows the number of unit diameter spheres that can fit in \
+a given box, using one of the lattices SC, FCC, BCC, or HCP (simple cubic, \
+face-centered cubic, body-centered cubic, or hexagonal close-packed). For a \
+sufficiently large box, FCC gives the densest packing. For many small boxes, \
+a denser non-lattice packing exists.\
+\>", "ManipulateCaption",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.457458866450076*^9, 3.4574589132360115`*^9}, {
+   3.457458945761662*^9, 3.457459006517877*^9}, 3.4578817178429465`*^9},
+ CellID->137590964]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "ThumbnailSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 4, $CellContext`l$$ = 
+    6, $CellContext`Lattice$$ = "FCC", $CellContext`w$$ = 5.76, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold["lattice"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Lattice$$], "FCC", ""}, {
+      "SC", "FCC", "BCC", "HCP"}}, {
+      Hold["box dimensions                              "], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`h$$], 4}, 2, 7}, {{
+       Hold[$CellContext`w$$], 5.76}, 2, 7}, {{
+       Hold[$CellContext`l$$], 6}, 2, 7}}, Typeset`size$$ = {
+    400., {215.5, 220.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`Lattice$1661984$$ = 
+    0, $CellContext`h$1661985$$ = 0, $CellContext`w$1661986$$ = 
+    0, $CellContext`l$1661987$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 4, $CellContext`l$$ = 
+        6, $CellContext`Lattice$$ = "FCC", $CellContext`w$$ = 5.76}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Lattice$$, $CellContext`Lattice$1661984$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1661985$$, 0], 
+        Hold[$CellContext`w$$, $CellContext`w$1661986$$, 0], 
+        Hold[$CellContext`l$$, $CellContext`l$1661987$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         Text[
+          Grid[{{"SC", "FCC", "BCC", "HCP"}, 
+            Map[Length[
+              $CellContext`pointList[#, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}]]& , {"SC", "FCC", "BCC", "HCP"}]}]], 
+         Graphics3D[{{Thick, Green, 
+            
+            Line[{{0, 0, 0}, {$CellContext`h$$, 0, 0}, {0, 0, 0}, {
+              0, $CellContext`l$$, 0}, {0, 0, 0}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {
+              0, $CellContext`l$$, 0}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, 0, 0}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, $CellContext`l$$, $CellContext`w$$}}]}, 
+           Sphere[
+            $CellContext`pointList[$CellContext`Lattice$$, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}], 1/2]}, ImageSize -> {400, 400}, 
+          SphericalRegion -> True, Boxed -> False]}, Alignment -> Center], 
+      "Specifications" :> {
+       "lattice", {{$CellContext`Lattice$$, "FCC", ""}, {
+         "SC", "FCC", "BCC", "HCP"}}, 
+        "box dimensions                              ", {{$CellContext`h$$, 
+          4}, 2, 7, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`w$$, 5.76}, 2, 7, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`l$$, 6}, 2, 7, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{609., {246., 251.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`pointList[
+         Pattern[$CellContext`lat, 
+          Blank[]], 
+         Pattern[$CellContext`cut, 
+          Blank[]]] := With[{$CellContext`store = N[
+            Which[$CellContext`lat == "SC", 
+             Flatten[
+              
+              Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                Part[$CellContext`cut, 1]}, {$CellContext`y, 0, 
+                Part[$CellContext`cut, 2]}, {$CellContext`z, 0, 
+                Part[$CellContext`cut, 3]}], 2], $CellContext`lat == "FCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], Sqrt[2]/2}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], Sqrt[2]/2}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], Sqrt[2]/2}], 2], EvenQ[
+               FullSimplify[
+                Total[#/(Sqrt[2]/2)]]]& ], $CellContext`lat == "BCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], 1/Sqrt[3]}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], 1/Sqrt[3]}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], 1/Sqrt[3]}], 2], Length[
+                Union[
+                 EvenQ[
+                  FullSimplify[#/(1/Sqrt[3])]]]] == 1& ], $CellContext`lat == 
+             "HCP", 
+             Join[
+              Flatten[
+               
+               Table[$CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 2]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 3]}], 2], 
+              Flatten[
+               Table[{0.5, Sqrt[3]/6, 
+                  Sqrt[2/3]} + $CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 2 Max[$CellContext`cut]}], 2]]]]}, 
+         Cases[$CellContext`store, PatternTest[
+             Pattern[$CellContext`xx, 
+              Blank[]], And[
+             0 <= Part[#, 1] <= Part[$CellContext`cut, 1] - 1, 0 <= 
+              Part[#, 2] <= Part[$CellContext`cut, 2] - 1, 0 <= Part[#, 3] <= 
+              Part[$CellContext`cut, 3] - 1]& ] -> $CellContext`xx] + 1/2]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->47240284]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SnapshotsSection"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 5.84, $CellContext`l$$ = 
+    6, $CellContext`Lattice$$ = "BCC", $CellContext`w$$ = 5, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold["lattice"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Lattice$$], "BCC", ""}, {
+      "SC", "FCC", "BCC", "HCP"}}, {
+      Hold["box dimensions                              "], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`h$$], 5.84}, 2, 7}, {{
+       Hold[$CellContext`w$$], 5}, 2, 7}, {{
+       Hold[$CellContext`l$$], 6}, 2, 7}}, Typeset`size$$ = {
+    400., {215.5, 220.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`Lattice$1662054$$ = 
+    0, $CellContext`h$1662055$$ = 0, $CellContext`w$1662056$$ = 
+    0, $CellContext`l$1662057$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 5.84, $CellContext`l$$ = 
+        6, $CellContext`Lattice$$ = "BCC", $CellContext`w$$ = 5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Lattice$$, $CellContext`Lattice$1662054$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1662055$$, 0], 
+        Hold[$CellContext`w$$, $CellContext`w$1662056$$, 0], 
+        Hold[$CellContext`l$$, $CellContext`l$1662057$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         Text[
+          Grid[{{"SC", "FCC", "BCC", "HCP"}, 
+            Map[Length[
+              $CellContext`pointList[#, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}]]& , {"SC", "FCC", "BCC", "HCP"}]}]], 
+         Graphics3D[{{Thick, Green, 
+            
+            Line[{{0, 0, 0}, {$CellContext`h$$, 0, 0}, {0, 0, 0}, {
+              0, $CellContext`l$$, 0}, {0, 0, 0}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {
+              0, $CellContext`l$$, 0}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, 0, 0}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, $CellContext`l$$, $CellContext`w$$}}]}, 
+           Sphere[
+            $CellContext`pointList[$CellContext`Lattice$$, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}], 1/2]}, ImageSize -> {400, 400}, 
+          SphericalRegion -> True, Boxed -> False]}, Alignment -> Center], 
+      "Specifications" :> {
+       "lattice", {{$CellContext`Lattice$$, "BCC", ""}, {
+         "SC", "FCC", "BCC", "HCP"}}, 
+        "box dimensions                              ", {{$CellContext`h$$, 
+          5.84}, 2, 7, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`w$$, 5}, 2, 7, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`l$$, 6}, 2, 7, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{609., {246., 251.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`pointList[
+         Pattern[$CellContext`lat, 
+          Blank[]], 
+         Pattern[$CellContext`cut, 
+          Blank[]]] := With[{$CellContext`store = N[
+            Which[$CellContext`lat == "SC", 
+             Flatten[
+              
+              Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                Part[$CellContext`cut, 1]}, {$CellContext`y, 0, 
+                Part[$CellContext`cut, 2]}, {$CellContext`z, 0, 
+                Part[$CellContext`cut, 3]}], 2], $CellContext`lat == "FCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], Sqrt[2]/2}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], Sqrt[2]/2}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], Sqrt[2]/2}], 2], EvenQ[
+               FullSimplify[
+                Total[#/(Sqrt[2]/2)]]]& ], $CellContext`lat == "BCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], 1/Sqrt[3]}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], 1/Sqrt[3]}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], 1/Sqrt[3]}], 2], Length[
+                Union[
+                 EvenQ[
+                  FullSimplify[#/(1/Sqrt[3])]]]] == 1& ], $CellContext`lat == 
+             "HCP", 
+             Join[
+              Flatten[
+               
+               Table[$CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 2]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 3]}], 2], 
+              Flatten[
+               Table[{0.5, Sqrt[3]/6, 
+                  Sqrt[2/3]} + $CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 2 Max[$CellContext`cut]}], 2]]]]}, 
+         Cases[$CellContext`store, PatternTest[
+             Pattern[$CellContext`xx, 
+              Blank[]], And[
+             0 <= Part[#, 1] <= Part[$CellContext`cut, 1] - 1, 0 <= 
+              Part[#, 2] <= Part[$CellContext`cut, 2] - 1, 0 <= Part[#, 3] <= 
+              Part[$CellContext`cut, 3] - 1]& ] -> $CellContext`xx] + 1/2]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->27025415],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 4, $CellContext`l$$ = 
+    6, $CellContext`Lattice$$ = "HCP", $CellContext`w$$ = 6.08, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold["lattice"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Lattice$$], "HCP", ""}, {
+      "SC", "FCC", "BCC", "HCP"}}, {
+      Hold["box dimensions                              "], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`h$$], 4}, 2, 7}, {{
+       Hold[$CellContext`w$$], 6.08}, 2, 7}, {{
+       Hold[$CellContext`l$$], 6}, 2, 7}}, Typeset`size$$ = {
+    400., {215.5, 220.5}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = False, $CellContext`Lattice$1662124$$ = 
+    0, $CellContext`h$1662125$$ = 0, $CellContext`w$1662126$$ = 
+    0, $CellContext`l$1662127$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 4, $CellContext`l$$ = 
+        6, $CellContext`Lattice$$ = "HCP", $CellContext`w$$ = 6.08}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`Lattice$$, $CellContext`Lattice$1662124$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1662125$$, 0], 
+        Hold[$CellContext`w$$, $CellContext`w$1662126$$, 0], 
+        Hold[$CellContext`l$$, $CellContext`l$1662127$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         Text[
+          Grid[{{"SC", "FCC", "BCC", "HCP"}, 
+            Map[Length[
+              $CellContext`pointList[#, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}]]& , {"SC", "FCC", "BCC", "HCP"}]}]], 
+         Graphics3D[{{Thick, Green, 
+            
+            Line[{{0, 0, 0}, {$CellContext`h$$, 0, 0}, {0, 0, 0}, {
+              0, $CellContext`l$$, 0}, {0, 0, 0}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {
+              0, $CellContext`l$$, 0}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, 0, 0}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, $CellContext`l$$, $CellContext`w$$}}]}, 
+           Sphere[
+            $CellContext`pointList[$CellContext`Lattice$$, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}], 1/2]}, ImageSize -> {400, 400}, 
+          SphericalRegion -> True, Boxed -> False]}, Alignment -> Center], 
+      "Specifications" :> {
+       "lattice", {{$CellContext`Lattice$$, "HCP", ""}, {
+         "SC", "FCC", "BCC", "HCP"}}, 
+        "box dimensions                              ", {{$CellContext`h$$, 
+          4}, 2, 7, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`w$$, 6.08}, 2, 7, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`l$$, 6}, 2, 7, Appearance -> 
+         "Labeled", ImageSize -> Tiny}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{609., {246., 251.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`pointList[
+         Pattern[$CellContext`lat, 
+          Blank[]], 
+         Pattern[$CellContext`cut, 
+          Blank[]]] := With[{$CellContext`store = N[
+            Which[$CellContext`lat == "SC", 
+             Flatten[
+              
+              Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                Part[$CellContext`cut, 1]}, {$CellContext`y, 0, 
+                Part[$CellContext`cut, 2]}, {$CellContext`z, 0, 
+                Part[$CellContext`cut, 3]}], 2], $CellContext`lat == "FCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], Sqrt[2]/2}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], Sqrt[2]/2}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], Sqrt[2]/2}], 2], EvenQ[
+               FullSimplify[
+                Total[#/(Sqrt[2]/2)]]]& ], $CellContext`lat == "BCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], 1/Sqrt[3]}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], 1/Sqrt[3]}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], 1/Sqrt[3]}], 2], Length[
+                Union[
+                 EvenQ[
+                  FullSimplify[#/(1/Sqrt[3])]]]] == 1& ], $CellContext`lat == 
+             "HCP", 
+             Join[
+              Flatten[
+               
+               Table[$CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 2]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 3]}], 2], 
+              Flatten[
+               Table[{0.5, Sqrt[3]/6, 
+                  Sqrt[2/3]} + $CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 2 Max[$CellContext`cut]}], 2]]]]}, 
+         Cases[$CellContext`store, PatternTest[
+             Pattern[$CellContext`xx, 
+              Blank[]], And[
+             0 <= Part[#, 1] <= Part[$CellContext`cut, 1] - 1, 0 <= 
+              Part[#, 2] <= Part[$CellContext`cut, 2] - 1, 0 <= Part[#, 3] <= 
+              Part[$CellContext`cut, 3] - 1]& ] -> $CellContext`xx] + 1/2]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->209180799],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`h$$ = 4, $CellContext`l$$ = 
+    6.5600000000000005`, $CellContext`Lattice$$ = "FCC", $CellContext`w$$ = 
+    6.32, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold["lattice"], Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`Lattice$$], "FCC", ""}, {
+      "SC", "FCC", "BCC", "HCP"}}, {
+      Hold["box dimensions                              "], 
+      Manipulate`Dump`ThisIsNotAControl}, {{
+       Hold[$CellContext`h$$], 4}, 2, 7}, {{
+       Hold[$CellContext`w$$], 6.32}, 2, 7}, {{
+       Hold[$CellContext`l$$], 6.5600000000000005`}, 2, 7}}, 
+    Typeset`size$$ = {400., {215.5, 220.5}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`Lattice$1662194$$ = 0, $CellContext`h$1662195$$ = 
+    0, $CellContext`w$1662196$$ = 0, $CellContext`l$1662197$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`h$$ = 4, $CellContext`l$$ = 
+        6.5600000000000005`, $CellContext`Lattice$$ = "FCC", $CellContext`w$$ = 
+        6.32}, "ControllerVariables" :> {
+        Hold[$CellContext`Lattice$$, $CellContext`Lattice$1662194$$, 0], 
+        Hold[$CellContext`h$$, $CellContext`h$1662195$$, 0], 
+        Hold[$CellContext`w$$, $CellContext`w$1662196$$, 0], 
+        Hold[$CellContext`l$$, $CellContext`l$1662197$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Column[{
+         Text[
+          Grid[{{"SC", "FCC", "BCC", "HCP"}, 
+            Map[Length[
+              $CellContext`pointList[#, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}]]& , {"SC", "FCC", "BCC", "HCP"}]}]], 
+         Graphics3D[{{Thick, Green, 
+            
+            Line[{{0, 0, 0}, {$CellContext`h$$, 0, 0}, {0, 0, 0}, {
+              0, $CellContext`l$$, 0}, {0, 0, 0}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {
+              0, $CellContext`l$$, 0}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, 0, 0}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {0, 0, $CellContext`w$$}, {
+              0, $CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}, {$CellContext`h$$, 
+               0, $CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, \
+$CellContext`w$$}, {$CellContext`h$$, $CellContext`l$$, 
+               0}, {$CellContext`h$$, $CellContext`l$$, $CellContext`w$$}}]}, 
+           Sphere[
+            $CellContext`pointList[$CellContext`Lattice$$, {$CellContext`h$$, \
+$CellContext`l$$, $CellContext`w$$}], 1/2]}, ImageSize -> {400, 400}, 
+          SphericalRegion -> True, Boxed -> False]}, Alignment -> Center], 
+      "Specifications" :> {
+       "lattice", {{$CellContext`Lattice$$, "FCC", ""}, {
+         "SC", "FCC", "BCC", "HCP"}}, 
+        "box dimensions                              ", {{$CellContext`h$$, 
+          4}, 2, 7, Appearance -> "Labeled", ImageSize -> 
+         Tiny}, {{$CellContext`w$$, 6.32}, 2, 7, Appearance -> "Labeled", 
+         ImageSize -> Tiny}, {{$CellContext`l$$, 6.5600000000000005`}, 2, 7, 
+         Appearance -> "Labeled", ImageSize -> Tiny}}, 
+      "Options" :> {ControlPlacement -> Left, TrackedSymbols -> True}, 
+      "DefaultOptions" :> {ControllerLinking -> True}],
+     ImageSizeCache->{609., {246., 251.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`pointList[
+         Pattern[$CellContext`lat, 
+          Blank[]], 
+         Pattern[$CellContext`cut, 
+          Blank[]]] := With[{$CellContext`store = N[
+            Which[$CellContext`lat == "SC", 
+             Flatten[
+              
+              Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                Part[$CellContext`cut, 1]}, {$CellContext`y, 0, 
+                Part[$CellContext`cut, 2]}, {$CellContext`z, 0, 
+                Part[$CellContext`cut, 3]}], 2], $CellContext`lat == "FCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], Sqrt[2]/2}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], Sqrt[2]/2}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], Sqrt[2]/2}], 2], EvenQ[
+               FullSimplify[
+                Total[#/(Sqrt[2]/2)]]]& ], $CellContext`lat == "BCC", 
+             Select[
+              Flatten[
+               
+               Table[{$CellContext`x, $CellContext`y, $CellContext`z}, \
+{$CellContext`x, 0, 
+                 Part[$CellContext`cut, 1], 1/Sqrt[3]}, {$CellContext`y, 0, 
+                 Part[$CellContext`cut, 2], 1/Sqrt[3]}, {$CellContext`z, 0, 
+                 Part[$CellContext`cut, 3], 1/Sqrt[3]}], 2], Length[
+                Union[
+                 EvenQ[
+                  FullSimplify[#/(1/Sqrt[3])]]]] == 1& ], $CellContext`lat == 
+             "HCP", 
+             Join[
+              Flatten[
+               
+               Table[$CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 2]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 
+                 Part[$CellContext`cut, 3]}], 2], 
+              Flatten[
+               Table[{0.5, Sqrt[3]/6, 
+                  Sqrt[2/3]} + $CellContext`x {1, 0, 0} + $CellContext`y {
+                  0.5, Sqrt[3]/2, 0} + $CellContext`z {0, 0, 
+                   Sqrt[8/3]}, {$CellContext`x, -Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`y, -
+                 Max[$CellContext`cut], 2 
+                 Max[$CellContext`cut]}, {$CellContext`z, -
+                 Max[$CellContext`cut], 2 Max[$CellContext`cut]}], 2]]]]}, 
+         Cases[$CellContext`store, PatternTest[
+             Pattern[$CellContext`xx, 
+              Blank[]], And[
+             0 <= Part[#, 1] <= Part[$CellContext`cut, 1] - 1, 0 <= 
+              Part[#, 2] <= Part[$CellContext`cut, 2] - 1, 0 <= Part[#, 3] <= 
+              Part[$CellContext`cut, 3] - 1]& ] -> $CellContext`xx] + 1/2]}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellID->496188111]
+}, Open  ]],
+
+Cell["", "DetailsSection"],
+
+Cell[CellGroupData[{
+
+Cell["", "ControlSuggestionsSection"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Resize Images"]}],
+  "\"Click inside an image to reveal its orange resize frame.\\nDrag any of \
+the orange resize handles to resize the image.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.457740307827694*^9},
+ FontFamily->"Verdana",
+ CellTags->"ResizeImages"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Rotate and Zoom in 3D"]}],
+  RowBox[{
+   "\"Drag a 3D graphic to rotate it. Starting the drag near the center \
+tumbles\\nthe graphic; starting near a corner turns it parallel to the plane \
+of the screen.\\nHold down \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" (or \"", 
+    FrameBox[
+    "Cmd", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" on Mac) and drag up and down to zoom.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.457740308376749*^9},
+ FontFamily->"Verdana",
+ CellTags->"RotateAndZoomIn3D"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Drag Locators"]}],
+  RowBox[{"\"Drag any locator (\"", 
+    GraphicsBox[
+     LocatorBox[
+      Scaled[{0.5, 0.5}]], ImageSize -> 20], 
+    "\", etc.) to move it around.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"DragLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Create and Delete Locators"]}],
+  RowBox[{"\"Insert a new locator in the graphic by holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key\\nand clicking where you want it to be. Delete a locator by \
+clicking it\\nwhile holding down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" key.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"CreateAndDeleteLocators"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Slider Zoom"]}],
+  RowBox[{"\"Hold down the \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], 
+    "\" key while moving a slider to make fine adjustments in the slider \
+value.\\nHold \"", 
+    FrameBox[
+    "Ctrl", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" and/or \"", 
+    FrameBox[
+    "Shift", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" at the same time as \"", 
+    FrameBox[
+    "Alt", Background -> GrayLevel[0.9], FrameMargins -> 2, FrameStyle -> 
+     GrayLevel[0.9]], "\" to make ever finer adjustments.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4578820109660707`*^9},
+ FontFamily->"Verdana",
+ CellTags->"SliderZoom"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Gamepad Controls"]}],
+  "\"Control this Demonstration with a gamepad or other\\nhuman interface \
+device connected to your computer.\"",
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.3895522232313623`*^9},
+ FontFamily->"Verdana",
+ CellTags->"GamepadControls"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[True], Cell[" Automatic Animation"]}],
+  RowBox[{"\"Animate a slider in this Demonstration by clicking the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJzzTSzJSM1NLMlMTlRwL0osyMhMLlZwyy8CCjEzMjAwcIKwAgOI/R/IhBKc\n\
+/4EAyGAG0f+nTZsGwgysIJIRKsWKLAXGIHFmEpUgLADxWUAkI24jZs+eTaEt\n\
+IG+wQKRmzJgBlYf5lhEA30OqWA=="], "Graphics", ImageSize -> {9, 9}, ImageMargins -> 
+      0, CellBaseline -> Baseline], BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"button\\nnext to the slider, and then clicking the play button that \
+appears.\\nAnimate all controls by selecting \"", 
+    StyleBox["Autorun", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ CellChangeTimes->{3.35696210375764*^9, 3.4578820120598135`*^9},
+ FontFamily->"Verdana",
+ CellTags->"AutomaticAnimation"],
+
+Cell[BoxData[
+ TooltipBox[
+  RowBox[{
+   CheckboxBox[False], Cell[" Bookmark Animation"]}],
+  RowBox[{
+   "\"See a prepared animation of this Demonstration by selecting\\n\"", 
+    StyleBox["Animate Bookmarks", FontWeight -> "Bold"], "\" from the\"", 
+    AdjustmentBox[
+     Cell[
+      GraphicsData[
+      "CompressedBitmap", 
+       "eJyNULENwyAQfEySIlMwTVJlCGRFsosokeNtqBmDBagoaZjAI1C8/8GUUUC6\n\
+57h7cQ8PvU7Pl17nUav7oj/TPH7V7b2QJAUAXBkKmCPRowxICy64bRvGGNF7\n\
+X8CctGoDSN4xhIDGGDhzFXwUh3/ClBKrDQPmnGXtI6u0OOd+tZBVUqy1xSaH\n\
+UqiK6pPe4XdEdAz6563tx/gejuORGMxJaz8mdpJn7hc="], "Graphics", 
+      ImageSize -> {10, 10}, ImageMargins -> 0, CellBaseline -> Baseline], 
+     BoxBaselineShift -> 0.1839080459770115, 
+     BoxMargins -> {{0., 0.}, {-0.1839080459770115, 0.1839080459770115}}], 
+    "\"menu.\""}],
+  TooltipDelay->0.35]], "ControlSuggestions",
+ FontFamily->"Verdana",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "SearchTermsSection"],
+
+Cell["sphere packing", "SearchTerms",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.457458825719261*^9, 3.4574588292493315`*^9}},
+ CellID->374240030]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "RelatedLinksSection"],
+
+Cell[TextData[ButtonBox["Sphere Packing",
+ BaseStyle->"Hyperlink",
+ ButtonData->{
+   URL["http://mathworld.wolfram.com/SpherePacking.html"], None},
+ ButtonNote->
+  "http://mathworld.wolfram.com/SpherePacking.html"]], "RelatedLinks",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4574588107189612`*^9, 3.457458820264152*^9}},
+ CellID->569469944]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "AuthorSection"],
+
+Cell[TextData[{
+ "Contributed by: ",
+ ButtonBox["Ed Pegg Jr",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"], 
+    None},
+  ButtonNote->
+   "http://demonstrations.wolfram.com/author.html?author=Ed+Pegg+Jr"]
+}], "Author",
+ CellChangeTimes->{
+  3.35696210375764*^9, {3.4574582832961926`*^9, 3.4574582859014425`*^9}, {
+   3.457458782108389*^9, 3.457458782108389*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{718, 681},
+WindowMargins->{{10, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (32-bit) (February 18, 2009)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Demonstration.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "ResizeImages"->{
+  Cell[51630, 1133, 374, 9, 22, "ControlSuggestions",
+   CellTags->"ResizeImages"]},
+ "RotateAndZoomIn3D"->{
+  Cell[52007, 1144, 740, 17, 22, "ControlSuggestions",
+   CellTags->"RotateAndZoomIn3D"]},
+ "DragLocators"->{
+  Cell[52750, 1163, 340, 11, 22, "ControlSuggestions",
+   CellTags->"DragLocators"]},
+ "CreateAndDeleteLocators"->{
+  Cell[53093, 1176, 637, 15, 22, "ControlSuggestions",
+   CellTags->"CreateAndDeleteLocators"]},
+ "SliderZoom"->{
+  Cell[53733, 1193, 908, 22, 22, "ControlSuggestions",
+   CellTags->"SliderZoom"]},
+ "GamepadControls"->{
+  Cell[54644, 1217, 369, 9, 22, "ControlSuggestions",
+   CellTags->"GamepadControls"]},
+ "AutomaticAnimation"->{
+  Cell[55016, 1228, 1528, 32, 22, "ControlSuggestions",
+   CellTags->"AutomaticAnimation"]},
+ "BookmarkAnimation"->{
+  Cell[56547, 1262, 908, 21, 22, "ControlSuggestions",
+   CellTags->"BookmarkAnimation"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"ResizeImages", 58991, 1342},
+ {"RotateAndZoomIn3D", 59100, 1345},
+ {"DragLocators", 59210, 1348},
+ {"CreateAndDeleteLocators", 59326, 1351},
+ {"SliderZoom", 59440, 1354},
+ {"GamepadControls", 59546, 1357},
+ {"AutomaticAnimation", 59659, 1360},
+ {"BookmarkAnimation", 59776, 1363}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 129, 2, 74, "DemoTitle"],
+Cell[CellGroupData[{
+Cell[721, 28, 33, 0, 266, "InitializationSection"],
+Cell[757, 30, 8929, 223, 416, "Input",
+ InitializationCell->True,
+ CellID->184601695]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9723, 258, 29, 0, 188, "ManipulateSection"],
+Cell[CellGroupData[{
+Cell[9777, 262, 5475, 127, 348, "Input"],
+Cell[15255, 391, 6989, 137, 509, "Output",
+ CellID->90292882]
+}, {2}]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22290, 534, 36, 0, 166, "ManipulateCaptionSection"],
+Cell[22329, 536, 354, 6, 22, "ManipulateCaption"],
+Cell[22686, 544, 572, 10, 67, "ManipulateCaption",
+ CellID->137590964]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23295, 559, 28, 0, 168, "ThumbnailSection"],
+Cell[23326, 561, 7012, 138, 509, "Output",
+ CellID->47240284]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30375, 704, 28, 0, 144, "SnapshotsSection"],
+Cell[30406, 706, 7012, 138, 509, "Output",
+ CellID->27025415],
+Cell[37421, 846, 7013, 138, 509, "Output",
+ CellID->209180799],
+Cell[44437, 986, 7087, 138, 509, "Output",
+ CellID->496188111]
+}, Open  ]],
+Cell[51539, 1127, 26, 0, 338, "DetailsSection"],
+Cell[CellGroupData[{
+Cell[51590, 1131, 37, 0, 114, "ControlSuggestionsSection"],
+Cell[51630, 1133, 374, 9, 22, "ControlSuggestions",
+ CellTags->"ResizeImages"],
+Cell[52007, 1144, 740, 17, 22, "ControlSuggestions",
+ CellTags->"RotateAndZoomIn3D"],
+Cell[52750, 1163, 340, 11, 22, "ControlSuggestions",
+ CellTags->"DragLocators"],
+Cell[53093, 1176, 637, 15, 22, "ControlSuggestions",
+ CellTags->"CreateAndDeleteLocators"],
+Cell[53733, 1193, 908, 22, 22, "ControlSuggestions",
+ CellTags->"SliderZoom"],
+Cell[54644, 1217, 369, 9, 22, "ControlSuggestions",
+ CellTags->"GamepadControls"],
+Cell[55016, 1228, 1528, 32, 22, "ControlSuggestions",
+ CellTags->"AutomaticAnimation"],
+Cell[56547, 1262, 908, 21, 22, "ControlSuggestions",
+ CellTags->"BookmarkAnimation"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57492, 1288, 30, 0, 158, "SearchTermsSection"],
+Cell[57525, 1290, 149, 3, 22, "SearchTerms",
+ CellID->374240030]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57711, 1298, 31, 0, 144, "RelatedLinksSection"],
+Cell[57745, 1300, 344, 8, 22, "RelatedLinks",
+ CellID->569469944]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58126, 1313, 25, 0, 142, "AuthorSection"],
+Cell[58154, 1315, 434, 12, 22, "Author"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

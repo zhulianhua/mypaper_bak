@@ -1,0 +1,31 @@
+\documentclass{minimal}
+\usepackage{tikz}
+\usetikzlibrary{matrix,decorations.pathreplacing}
+
+\begin{document}
+  \begin{tikzpicture}[%
+    >=stealth,
+    shorten >=2pt,
+    thick
+  ]
+    \matrix (block) [%
+      matrix of nodes,
+      nodes={%
+        draw,
+        anchor=center,
+        minimum width=3em,
+        minimum height=2em
+      }
+    ] {%
+      \node[fill=blue!10]{\ldots}; &\node[fill=blue!25]{$f_0$}; & \node[fill=blue!25]{$f_1$};
+       & \node[fill=blue!25]{$f_2$}; & \node[fill=blue!25]{\ldots}; & \node[fill=blue!25]{$f_{q-1}$};
+      &\node[fill=blue!45]{$f_0$}; & \node[fill=blue!45]{$f_1$}; & \node[fill=blue!45]{$f_2$};
+       & \node[fill=blue!45]{\ldots}; & \node[fill=blue!45]{$f_{q-1}$};&\node[fill=blue!10]{\ldots}; \\
+    };
+         
+   % \draw[thin] (block-1-1.south east) +(0,-0.1) -- +(0,-1) (block-1-7.south east) +(0,-0.1)--+(0,-1.1) ;
+   % \draw[decorate, decoration={brace, mirror} ,  blue] (block-1-2.south) -- (block-1-2.south) ; %(0,-2) -- (3,-2);
+     \draw (block-1-4.south) +(0, -0.5) node {};
+     
+  \end{tikzpicture}
+\end{document}

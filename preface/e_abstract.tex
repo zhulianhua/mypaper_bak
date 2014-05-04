@@ -1,0 +1,47 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   LaTeX File for Doctor (Master) Thesis of Tsinghua University
+%   LaTeX + CJK     清华大学博士（硕士）论文模板
+%   Based on Wang Tianshu's Template for XJTU
+%   Version: 1.00
+%   Last Update: 2003-09-12
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Copyright 2002-2003  by  Lei Wang (BaconChina)       (bcpub@sina.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%   LaTeX File for xi'an Jiao Tong University
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Copyright 2001  by  Wang Tianshu    (tswang@asia.com)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\baselinestretch}{1.5}
+\fontsize{12pt}{13pt}\selectfont
+
+\chapter[ABSTRACT]{\textsf{\textbf{Abstract}}}
+\markboth{英~文~摘~要}{英~文~摘~要}
+\noindent 
+Numerical simulations of flows with complex solid-fluid boundary are
+of great importance in industrial areas such as
+Oil\&Gas recovery, renewabel energy development, chemical process and environment 
+engineering. Lattice Boltzmann method(LBM) is a powerful tool
+for simulating of these complex flow phenomenon due to its easy processing of 
+solid-fuid boudary and ability of modeling of multiphase/multicomponent flow.
+
+From the compuatational standpoint, LBM is well suited for parallel implementation.
+On the  emerging massively parallel graphics processing units(GPU) platform, LBM exhabits
+an extrodinary  performance at a rather low cost.  
+The combining of the GPU and LBM is promising technique to simulate complex flow in complex
+geometries.
+
+In this work, parallel LBM simulators were developed within the CUDA GPU programming framework.
+Using the simulators, we carried out simulation of single phase flow and mulitcompnet-multiphase flow in porous media.
+We also investigate performance optimization techniques to deal with the 
+complex geometries and interacation of components. 
+Performance evalution and detailed analysis are conducted for the optimization techniques.
+
+\vspace{1em}
+\noindent {\textbf{Key Words:}} \quad lattice Boltzmann method, graphics processing units,
+high performance computing, multiphase flow, porous media
