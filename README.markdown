@@ -11,6 +11,6 @@
 * Multi phase pore-scale LBM simulation on GPU
 * Summary
 
-Huazhong Unviersity of Science and Technology
+Supervisor: Zhaoli Guo, School of Energy and Power, Huazhong Unviersity of Science and Technology
 
 The template is forked from https://code.google.com/p/nwputhesis/.
